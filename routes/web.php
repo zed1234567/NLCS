@@ -14,9 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin',function(){
+	return view('admin.index');
+})->name('admin.index');
+
+// Product
+
+Route::get('/product','ProductController@index')->name('product.index');
+Route::get('/product/create',"ProductController@create")->name('product.create');
+Route::post('/product',"ProductController@store")->name('product.store');
