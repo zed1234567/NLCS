@@ -13,3 +13,4 @@ function btnOnTop(){
 function onTop(){
     document.documentElement.scrollTop =0;
 }
+

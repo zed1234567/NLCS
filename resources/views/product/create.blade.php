@@ -5,28 +5,34 @@
        <div class="row shadow py-5">
           <div class="col">
             <h3 class="text-center mb-5">Thêm sản phẩm mới.</h3>
-            <form action="" method="post" enctype="multipart/form-data">
-
+            <form action="{{ route('product.store') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+              @csrf
               <div class="row">
                 <div class="col-6 form-group">
                   <label for="name">Tên sản phẩm</label>
-                  <input type="text"  class="form-control" name="name" placeholder="Nhập tên sản phẩm ... " required autocomplete="off">
+                  <input type="text"  class="form-control" name="name" placeholder="Nhập tên sản phẩm ... " required value="{{ old('name') }}" autocomplete="off">
+                  @error('name')
+                  <strong class="text-danger">*{{ $message }}</strong>
+                  @enderror
                 </div>
 
                 <div class="col-6 form-group">
                   <label for="price">Giá sản phẩm</label>
-                  <input type="text"  class="form-control" name="price" placeholder="Nhập giá sản phẩm ..." required autocomplete="off">
+                  <input type="text"  class="form-control" name="price" placeholder="Nhập giá sản phẩm ..." required value="{{ old('price') }}" autocomplete="off">
+                  @error('price')
+                  <strong class="text-danger">*{{ $message }}</strong>
+                  @enderror
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-6 form-group">
                   <label for="group">Loại sản phẩm</label>
-                  <select name="group" class="form-control">
+                  <select name="group_id" class="form-control">
 
-                    <option value="0" default disabled>Chọn loại sản phẩm</option>
+                    <option value="" selected  disabled>Chọn loại sản phẩm</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->group}}</option>
+                    <option value="{{ $group->id }}">{{ $group->group }}</option>
                     @endforeach
 
                   </select>
@@ -34,11 +40,11 @@
 
                 <div class="col-6 form-group">
                   <label for="brand">Thương hiệu</label>
-                  <select name="group" class="form-control">
+                  <select name="brand_id" class="form-control">
 
-                    <option value="0" default disabled>Chọn thương hiệu</option>
+                    <option value="" selected  disabled>Chọn thương hiệu</option>
                     @foreach($brands as $brand)
-                    <option value="{{ $brand->id }}">{{ $brand->brand}}</option>
+                    <option value="{{ $brand->id }}">{{ $brand->brand }}</option>
                     @endforeach
 
                   </select>
@@ -48,11 +54,16 @@
               <div class="row">
                 <div class="col-6 form-group">
                   <label for="quantity">Số Lượng</label>
-                  <input type="text"  class="form-control" name="quantity" placeholder="Nhập số lượng ... " required autocomplete="off">
+                  <input type="text"  class="form-control" name="quantity" placeholder="Nhập số lượng ... " required value="{{ old('quantity') }}" autocomplete="off">
+                  @error('quantity')
+                      
+                          <strong class="text-danger">*{{ $message }}</strong>
+                     
+                  @enderror
                 </div>
                 <div class="col-6 form-group">
                     <label for="detail">Mô tả sản phẩm</label>
-                    <textarea name="detail" cols="50"
+                    <textarea name="description" cols="50"
                     rows="4" placeholder="Nhập mô tả sản phẩm" class="form-control"></textarea>
                   </div>
               </div>
@@ -60,7 +71,10 @@
               <div class="row">
                 <div class="col form-group">
                   <label for="image">Hình ảnh</label>
-                  <input type="file" name="image[]"  class="form-control-file border" multiple>
+                  <input type="file" name="image[]"  class="form-control-file border" required multiple>
+                  @error('image')
+                  <strong class="text-danger">*{{ $message }}</strong>
+                  @enderror
                 </div>
               </div>
 

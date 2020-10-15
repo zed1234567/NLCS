@@ -50,18 +50,20 @@
         <!-- End-Carousel -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            @foreach($products as $product)
+            <div class="col-lg-2 col-md-6 m-2">
                 <div class="product">
                     <div class="product-img">
-                        <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a>
+                        <a href="{{ route('product.show',$product->id)}}"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
+                        <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->
                         <div class="product-overlay">
                             <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
 							<a href="#" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
                         </div>
                     </div>
                     <div class="product-desc">
-                        <div class="product-title"><a href="">Checked Short Dress</a></div>
-                        <div class="product-price">$23</div>
+                        <div class="product-title"><a href="">{{ $product->name }}</a></div>
+                        <div class="product-price">{{ number_format($product->price) }}</div>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -72,72 +74,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="product">
-                    <div class="product-img">
-                        <a href="" class="change-img"><img class="img-on" src="{{ asset('img/1-1.jpg') }}" alt=""><img class="img-off" src="{{ asset('img/2-2.jpg') }}" alt=""></a>
-                        <div class="product-overlay">
-                            <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
-							<a href="#" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
-                        </div>
-                    </div>
-                    <div class="product-desc">
-                        <div class="product-title"><a href="">Checked Short Dress</a></div>
-                        <div class="product-price">$23</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="{{ asset('img/2-2.jpg') }}" alt="">
-                        <div class="product-overlay">
-                            <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
-							<a href="#" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
-                        </div>
-                    </div>
-                    <div class="product-desc">
-                        <div class="product-title"><a href="">Checked Short Dress</a></div>
-                        <div class="product-price">$23</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="{{ asset('img/1-1.jpg') }}" alt="">
-                        <div class="product-overlay">
-                            <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
-							<a href="#" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
-                        </div>
-                    </div>
-                    <div class="product-desc">
-                        <div class="product-title"><a href="">Checked Short Dress</a></div>
-                        <div class="product-price">$23</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            
         </div>
     </div> 
     <div class="container">

@@ -249,7 +249,71 @@ body{
 	transform: translateY(-5px);
 }
 
+/*-------------- Modal Img Items-----------*/
+.myModalImg{
+	display: none;
+	position: fixed;
+	z-index: 1031;
+	padding-top: 50px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: rgba(0,0,0);
+	background-color: rgba(0,0,0,0.9);
+}
 
+.modalContent{
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 600px;
+	
+}
+
+.modalContent{
+	animation-name: zoom;
+	animation-duration: 0.5s;
+	overflow-x: hidden;
+}
+
+.myModalImg:hover img{
+	transform: rotateY(360deg);
+}
+
+@keyframes zoom {
+	from {transform: scale(0)}
+	to {transform: scale(1)}
+}
+
+
+
+.closeM{
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	font-size: 50px;
+}
+
+.closeM:hover,
+.closeM:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.inner{
+    overflow: hidden;
+}
+
+.inner:hover img{
+	cursor: pointer;
+}
+
+.inner img{
+	transition: all 1.5s ease;
+}
 
 /*------------FOOTER----------------------*/
 

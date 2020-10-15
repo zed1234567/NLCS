@@ -32,13 +32,11 @@
         
             <li class="nav-item">
                 <a href="#showall" data-toggle="collapse" class="nav-link link-collapse">
-                    Show All<i class="fas fa-chevron-down icon-down float-right"></i>
+                    Show<i class="fas fa-chevron-down icon-down float-right"></i>
                 </a>
                 <ul id="showall" class="collapse background-collapse list-unstyled">
                     <li><a href="{{ route('product.index') }}" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
+                    <li><a href="" class="collapse-item">Invoice</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -47,9 +45,8 @@
                 </a>
                 <ul id="addproduct" class="collapse background-collapse list-unstyled">
                     <li><a href="{{ route('product.create')}}" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Product</a></li>
+                    <li><a href="{{ route('product.GB') }}" class="collapse-item">Group - Brand</a></li>
+                   
                 </ul>
             </li>
        </ul>
