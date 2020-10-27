@@ -28,6 +28,7 @@
                             <th>Thương hiệu</th>
                             <th>Ảnh</th>
                             <th>Mô tả</th>
+                            <th>Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,19 @@
                                 <td>{{ $product->group->group }}</td>
                                 <td>{{ $product->brand->brand }}</td>
                                 <td><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt="" height=100 weight=100></td>
+                                <td></td>
+                                <td class="d-flex">
+                                    <form action="{{ route('product.edit',$product->id) }}" class="mr-3">
+                                        @csrf
+                                       <button type="submit" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></button>
+                                    </form>
+
+                                    <form action="{{ route('product.destroy',$product->id) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                       <button type="submit"  class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -19,7 +19,7 @@ class CreateInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->integer('price');
-            $table->integer('total');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

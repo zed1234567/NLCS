@@ -12,7 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/function.js') }}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Fontawesome -->
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -56,9 +56,9 @@
                         </li> -->
                         <li class="nav-item">
                            
-                            <a href="" class="nav-link text-center b4-navbar">
+                            <a href="{{ route('cart.index') }}" class="nav-link text-center b4-navbar">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span id="top-cart">5</span>
+                                <span id="top-cart">{{ count((array)session('cart'))}}</span>
                             </a>
                            
                         </li>

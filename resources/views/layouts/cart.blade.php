@@ -1,0 +1,138 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container mt-3">
+
+    @if(session('cart'))
+        <?php $total=0; ?>
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center mb-3">Shopping Cart</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Product</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(session('cart') as $id => $product)
+                           <?php $total+= ($product['price']*$product['quantity']) ?>
+                        <tr>
+                            <td>{{$product['name']}}</td>
+                            <td>{{ number_format($product['price'])}}</td>
+                            <td>    
+                                <input type="number" min="1" data-id="{{$id}}" name="quantity" class="text-center" value="{{$product['quantity']}}">
+                            </td>
+                            <td>{{number_format($product['price']*$product['quantity'])}}</td>
+                            <th><button class="btn btn-outline-danger remove" data-id="{{$id}}"><i class="far fa-trash-alt"></i></button></th>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <h4 class="text-center mb-3">Cart Total</h4>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Cart Subtotal</td>
+                            <td>{{ number_format($total) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>{{ number_format($total) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <h4 class="text-center mb-3">Customer Information</h4>
+                <form action="{{ route('invoice.store') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="text" name="customer_name" placeholder="Nhập họ và tên ..." class="form-control" autocomplete="off" required>
+                            @error('customer_name')
+                            <strong class="text-danger">*{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <input type="text" name="customer_phone" placeholder="Nhập số điện thoại ..." class="form-control" autocomplete="off" required>
+                            @error('customer_phone')
+                            <strong class="text-danger">*{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="text" name="customer_address" placeholder="Nhập địa chỉ giao hàng ..." class="form-control" autocomplete="off" required>
+                            @error('customer_address')
+                            <strong class="text-danger">*{{ $message }}</strong>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-lg btn-success">Đặt Hàng</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    @else
+        <div class="row mt-5">
+            <div class="col text-center">
+                <h3>Không có sản phẩm nào, mời bạn tiếp tục mua sắm!</h3>
+                <a href="{{ route('index') }}" class="btn btn-outline-success">Quay lại trang chủ</a>
+            </div>
+        </div>
+    @endif
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".remove").click(function(e){
+            e.preventDefault();
+            var ele = $(this);
+            if(confirm("Are you sure?")){
+                $.ajax({
+                    url:"{{ route('cart.remove') }}",
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function(response){
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+        $("input[name='quantity']").change(function(e){
+            e.preventDefault();
+            var ele = $(this);
+            $.ajax({
+                url: "{{ route('cart.update') }}",
+                method: "PATCH",
+                data: {_token: '{{ csrf_token() }}',id: ele.attr("data-id"),quantity: ele.val()},
+                success: function(response){
+                    window.location.reload();
+                }
+            });
+            
+        });
+    });
+</script>
+@endsection

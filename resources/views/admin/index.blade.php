@@ -36,7 +36,7 @@
                 </a>
                 <ul id="showall" class="collapse background-collapse list-unstyled">
                     <li><a href="{{ route('product.index') }}" class="collapse-item">Product</a></li>
-                    <li><a href="" class="collapse-item">Invoice</a></li>
+                    <li><a href="{{ route('invoice.index') }}" class="collapse-item">Invoice</a></li>
                 </ul>
             </li>
             <li class="nav-item">

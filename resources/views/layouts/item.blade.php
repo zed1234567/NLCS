@@ -45,10 +45,9 @@
                 </div>
 
                 <!-- FROM MUA HÀNG -->
-                <form action="" method="post">
+                <form action="{{ route('cart.add',$product->id) }}" method="get">
                     <div class="row">
                         <div class="col">
-                            <input type="hidden" name="code" value="">
                             <button type="submit" class="btn btn-danger font-weight-bold mt-5 btn-block" styles="">THÊM VÀO GIỎ HÀNG</button>
                         </div>
                     </div>
