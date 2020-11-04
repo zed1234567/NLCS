@@ -4,7 +4,20 @@
    <div class="container-fluid mt-lg-5">
        <div class="row shadow py-5">
           <div class="col">
-            <h3 class="text-center mb-5">Chỉnh sửa {{$product->name}}.</h3>
+            <div class="row">
+              <div class="col-6">
+                <h3 class=" mb-5">Chỉnh sửa {{$product->name}}.</h3>
+              </div>
+              <div class="col-6">
+                @if(session('message'))
+                  <div class="alert alert-success alert-dismissible">
+                      {{ session('message') }}
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  </div>
+                @endif
+              </div>
+            </div>
+            
             <form action="{{ route('product.update',$product->id) }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PATCH')
@@ -78,7 +91,9 @@
                   @enderror
                 </div>
                 <div class="col-6">
-                    <img src="{{ asset('/uploads/'.$product->images[0]->image) }}" height=150 weight=50 class="p-2" alt="">
+                  @foreach($product->images as $key=>$image)
+                    <img src="{{ asset('/uploads/'.$image['image']) }}" height=150 weight=50 class="p-2" alt="">
+                  @endforeach
                 </div>
               </div>
 

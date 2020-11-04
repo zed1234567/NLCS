@@ -18,12 +18,13 @@
                     </div>
                 </div>
                
-                <table class="table  table-lg-responsive">
+                <table class="table  table-lg-responsive ">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Giá</th>
+                            <th>Số lượng</th>
                             <th>Nhóm</th>
                             <th>Thương hiệu</th>
                             <th>Ảnh</th>
@@ -37,6 +38,7 @@
                                 <td scope="row">{{ $product->id}}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ number_format($product->price) }}</td>
+                                <td>{{ $product->quantity}}</td>
                                 <td>{{ $product->group->group }}</td>
                                 <td>{{ $product->brand->brand }}</td>
                                 <td><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt="" height=100 weight=100></td>

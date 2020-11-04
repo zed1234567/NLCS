@@ -5,7 +5,7 @@
        <div class="row shadow py-5">
           <div class="col">
             <h3 class="text-center mb-5">Thêm sản phẩm mới.</h3>
-            <form action="{{ route('product.store') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('product.store') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
                 <div class="col-6 form-group">
@@ -71,7 +71,7 @@
               <div class="row">
                 <div class="col form-group">
                   <label for="image">Hình ảnh</label>
-                  <input type="file" name="image[]"  class="form-control-file border" required multiple>
+                  <input type="file" name="image[]"  class="form-control-file " required multiple>
                   @error('image')
                   <strong class="text-danger">*{{ $message }}</strong>
                   @enderror

@@ -1,29 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid mt-3">
+<div class="container mt-3">
     <div class="row">
         <div class="col">
-            <h2 class="text-uppercase ml-5">{{$product->name}}</h2>
+            <h2 class="text-uppercase">{{$product->name}}</h2>
         </div>
     </div>
     <div class="row">
-
+        
         <!-- CỘT HÌNH ẢNH-->
         <div class="col-md-6 col-lg-4 col-sm-12">
+            <div id="carouselId" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @foreach($product->images as $key=>$image)
+                        <li data-target="#carouselId" data-slide-to="{{$key}}" class="{{ $key ==0 ? 'active' : '' }}"></li>
+                    @endforeach
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @foreach($product->images as $key=>$image)
+                    <div class="carousel-item {{ $key ==0 ? 'active' : '' }}">
+                        <div class="inner">
+                            <img src="{{ asset('/uploads/'.$image['image']) }}" alt="slide {{$key}}" class="myImg img-fluid mx-auto d-block" >
+                        </div>
+                        
+                    </div>
+                    <div class="myModalImg" id="myModalImg">
+                        
+                        <span class="closeM" id="closeM">&times;</span>
+                        <img src="{{ asset('/uploads/'.$image['image']) }}" id="img" class="modalContent">
+                       
+                    </div>
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon text-danger" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
 
-            <div class="inner">
+            <!-- <div class="inner">
                 <img src="{{ asset('/uploads/'.$product->images[0]->image) }}" 
                         class="img-fluid mx-auto d-block" 
                         style="width: 400px;max-height: 400px;" 
                         id="myImg">
-            </div>
+            </div> -->
             
-            <div class="myModalImg" id="myModalImg">
+            <!-- <div class="myModalImg" id="myModalImg">
                 <span class="closeM" id="closeM">&times;</span>
                 <img src="{{ asset('/uploads/'.$product->images[0]->image)  }}" 
                         id="img" class="modalContent">
-            </div>
+            </div> -->
             
         </div>
         <!-- ------------ -->
@@ -34,7 +65,7 @@
                 <span style="font-size: 20px">VND</span>
             </h2>
             <div>
-                <p class="border font-weight-bold" style="font-size: 1rem;"><i class="fas fa-shipping-fast mr-2 ml-2"></i>GIAO HÀNH NHANH TRONG 1 GIỜ 63 TỈNH THÀNH</p>
+                <p class="border font-weight-bold" style="font-size: 0.8rem;"><i class="fas fa-shipping-fast mr-2 ml-2"></i>GIAO HÀNH NHANH TRONG 1 GIỜ 63 TỈNH THÀNH</p>
                 <div class="border">
                     <p style="background-color: #34a105; color: white" class="font-weight-bold">Khuyến mãi đặc biệt (SL có hạn)</p>
                     <ul style="list-style-type: square;" class="ml-4">
@@ -87,19 +118,26 @@
         </div>
         <!-- -------------------- -->
     </div>
+    
 </div>
 <script>
     var modal = document.getElementById("myModalImg");
-    var img = document.getElementById("myImg");
+    var img = document.getElementsByClassName("myImg");
     var modalImg = document.getElementById("img");
-    img.onclick = function() {
+    for(var i =0; i<img.length;i++){
+        img[i].onclick = function() {
         modal.style.display = "block";
         modalImg.src=this.src;
+        }
     }
+   
 
-    var close = document.getElementById("closeM");
+    var close = document.getElementsByClassName("closeM")[0];
+    
     close.onclick = function() {
         modal.style.display = "none";
     }
+    
+    
 </script>
 @endsection

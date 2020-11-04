@@ -12,35 +12,37 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $products=App\Product::all();
-    return view('index',compact('products'));
-})->name('index');
-
 Auth::routes();
+//index
+Route::get('/','Controller@index')->name('index');
+
+Route::get('/phone','Controller@Phone')->name('smartphone');
+Route::get('/laptop','Controller@laptop')->name('laptop');
+Route::get('/tablet','Controller@tablet')->name('table');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin',function(){
-	return view('admin.index');
-})->name('admin.index');
+
+//Search
+
+Route::get('/search','Controller@search')->name('search');
 
 // Product Admin
-
-Route::get('/product','ProductController@index')->name('product.index');
-Route::get('/product/create',"ProductController@create")->name('product.create');
-Route::post('/product',"ProductController@store")->name('product.store');
-Route::get('/product/{product}/edit','ProductController@edit')->name('product.edit');
-Route::patch('/product/{product}','ProductController@update')->name('product.update');
-Route::delete('/product/{product}','ProductController@destroy')->name('product.destroy');
-Route::get('/invoice','InvoiceController@index')->name('invoice.index');
-
-
-Route::get('/product/group-brand','ProductController@createGB')->name('product.GB');
-Route::post('/brand','BrandController@store')->name('brand.store');
-Route::post('/group','GroupController@store')->name('group.store');
-Route::delete('/brand/{brand}','BrandController@destroy')->name('brand.destroy');
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/admin',function(){
+        return view('admin.index');
+    })->name('admin.index');
+    Route::get('/product','ProductController@index')->name('product.index');
+    Route::get('/product/create',"ProductController@create")->name('product.create');
+    Route::post('/product',"ProductController@store")->name('product.store');
+    Route::get('/product/{product}/edit','ProductController@edit')->name('product.edit');
+    Route::patch('/product/{product}','ProductController@update')->name('product.update');
+    Route::delete('/product/{product}','ProductController@destroy')->name('product.destroy');
+    Route::get('/invoice','InvoiceController@index')->name('invoice.index');
+    Route::get('/product/group-brand','ProductController@createGB')->name('product.GB');
+    Route::post('/brand','BrandController@store')->name('brand.store');
+    Route::post('/group','GroupController@store')->name('group.store');
+    Route::delete('/brand/{brand}','BrandController@destroy')->name('brand.destroy');
+});
 
 //Detail Product
 Route::get('/item/{item}','ProductController@show')->name('product.show');
@@ -53,3 +55,6 @@ Route::patch('/update-form-cart','ProductController@updateFormCart')->name('cart
 
 //Invoice
 Route::post('/addinvoice','InvoiceController@storeInvoice')->name('invoice.store');
+
+//Filter Product
+Route::get('/filter','ProductController@filterProduct')->name('filter');

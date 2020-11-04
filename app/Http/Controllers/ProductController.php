@@ -56,7 +56,7 @@ class ProductController extends Controller
                 
             }
         }
-        return back();
+        return back()->with('message','Đã Lưu!');;
 
     }
 
@@ -88,6 +88,7 @@ class ProductController extends Controller
     //--------Detail item
     public function show($item){
         $product = Product::findOrFail($item);
+        // dd($product->images);
         return view('layouts.item',compact('product'));
     }
 
@@ -106,23 +107,25 @@ class ProductController extends Controller
                 $id => [
                     'name' => $product->name,
                     'price' => $product->price,
-                    'quantity' => 1
+                    'quantity' => 1,
+                    'img' => $product->images[0]->image
                 ]
                 ];
             
             session()->put('cart',$cart);
-            return redirect()->back()->with('msg',"Da Them");
+            return redirect()->back()->with('msg',"Đã Thêm vào giỏ hàng");
         }
 
 
         $cart[$id] = [
             'name' => $product->name,
             'price' => $product->price,
-            'quantity' => 1
+            'quantity' => 1,
+            'img' => $product->images[0]->image
         ];
 
         session()->put('cart',$cart);
-        return redirect()->back()->with('msg',"Da Them");
+        return redirect()->back()->with('msg',"Đã Thêm vào giỏ hàng");
     }
 
     public function updateFormCart(Request $request){
@@ -144,4 +147,44 @@ class ProductController extends Controller
         }
     }
 
+    public function filterProduct(Request $request){
+
+        $minPrice =['1' => '5000000','2' => '15000000','3'=>'25000000'];
+        $product = Product::query();
+
+        if($request->has('brand') && $request->brand != null){
+            $product = $product->where([
+                'group_id' => $request->type,
+                'brand_id' => $request->brand
+            ]);
+        }
+        if($request->has('price') && $request->price ==1){
+            $product->where('group_id',$request->type)->where('price','<=',$minPrice['1']);
+        }
+
+        if($request->has('price') && $request->price ==2){
+            $product->where('group_id',$request->type)->whereBetween('price',[$minPrice['1'],$minPrice['2']]);
+        }
+
+        if($request->has('price') && $request->price ==3){
+            $product->where('group_id',$request->type)->whereBetween('price',[$minPrice['2'],$minPrice['3']]);
+        }
+
+        if($request->has('price') && $request->price ==4){
+            $product->where('group_id',$request->type)->where('price','>=',$minPrice['3']);
+        }
+
+        if($request->has('sort') && $request->sort == "DESC"){
+            $product = $product->where('group_id',$request->type)->orderBy('price','DESC');
+        }
+
+        if($request->has('sort') && $request->sort == "ASC"){
+            $product = $product->where('group_id',$request->type)->orderBy('price','ASC');
+        }
+
+        $products= $product->get();
+        return view('layouts.print',compact('products'));
+    }
+    //--------------------------
+    
 }

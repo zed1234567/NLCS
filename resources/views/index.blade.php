@@ -60,84 +60,65 @@
     </div>
         <!-- End-Carousel -->
     <div class="container">
-        <div class="row">
-            @foreach($products as $product)
-            <div class="col-lg-3 col-md-6">
-                <div class="product w-55">
-                    <div class="product-img">
-                        <a href="{{ route('product.show',$product->id)}}"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
-                        <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->
-                        <div class="product-overlay">
-                            <a href="{{ route('cart.add',$product->id) }}" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
-							<a href="#" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
+        @foreach($types as $products)
+            <div class="d-flex justify-content-between">
+                <h5 class="font-weight-bold">{{ $products[0]->group->group }} NỔI BẬT NHẤT</h5>
+                <a href="{{ route(strtolower($products[0]->group->group)) }}">Xem tất cả</a>
+            </div>
+            <div class="row justify-content-between mb-4">
+                @foreach($products as $product)
+                <div class="col-lg-3 col-md-6 mt-3">
+                    <div class="product">
+                        <div class="product-img">
+                            <a href="{{ route('product.show',$product->id)}}" class="text-center"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
+                            <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->
+                            <div class="product-overlay">
+                                <a href="{{ route('cart.add',$product->id) }}" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
+                                <a href="{{ route('product.show',$product->id)}}" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
+                            </div>
+                            <div class="product-discount">
+                                <p>Trả góp 0%</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-desc">
-                        <div class="product-title"><a href="">{{ $product->name }}</a></div>
-                        <div class="product-price">{{ number_format($product->price) }}</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                        <div class="product-desc">
+                            <div class="product-title"><a href="">{{ $product->name }}</a></div>
+                            <div class="product-price">{{ number_format($product->price) }}₫</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                
             </div>
-            @endforeach
-            
-        </div>
+        @endforeach
     </div> 
-    <div class="container">
-        <div class="row pt-lg-5">
-           <div class="col">
-                <div class="fancy-title title-border">
-                    <h4>Popular Brands</h4>
-                </div>
-           </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-borderless text-center">
-                   
-                        <tbody class="p-5">
-                            <tr>
-                                <td><img src="{{ asset('img/iPhone.jpg') }}" alt="iPhone" class="img-brands"></td>
-                                <td><img src="{{ asset('img/Samsung.jpg') }}" alt="samsung" class="img-brands"></td>
-                                <td><img src="{{ asset('img/OPPO.png') }}" alt="OPPO" class="img-brands"></td>
-                                <td><img src="{{ asset('img/iPhone.jpg') }}" alt="iPhone" class="img-brands"></td>
-                            </tr>
-                            <tr>
-                                <td><img src="{{ asset('img/iPhone.jpg') }}" alt="iPhone" class="img-brands"></td>
-                                <td><img src="{{ asset('img/Samsung.jpg') }}" alt="samsung" class="img-brands"></td>
-                                <td><img src="{{ asset('img/OPPO.png') }}" alt="OPPO" class="img-brands"></td>
-                                <td><img src="{{ asset('img/iPhone.jpg') }}" alt="iPhone" class="img-brands"></td>
-                            </tr>
-                        </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+   
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12 text-center ">
                 <h5><i class="far fa-thumbs-up mr-3"></i>100% ORIGINAL</h5>
                 <p>We guarantee you the sale of Original Brands.</p>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12 text-center ">
                 <h5><i class="far fa-credit-card mr-3"></i>PAYMENT OPTIONS</h5>
                 <p>We accept Visa, MasterCard and American Express.</p>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12 text-center ">
                 <h5><i class="fas fa-truck mr-3"></i>FREE SHIPPING</h5>
                 <p>Free Delivery to 100+ Locations on orders above $40.</p>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12 text-center ">
                 <h5><i class="fas fa-retweet mr-3"></i>30-DAYS RETURNS</h5>
                 <p>Return or exchange items purchased within 30 days.</p>
             </div>
         </div>
+        <div class="fancy-title title-border"></div>
         
     </div>
     <div id="scrollOnTop" onclick="onTop()" ><i class="fas fa-chevron-up"></i></div>

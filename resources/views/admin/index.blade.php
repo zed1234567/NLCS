@@ -83,24 +83,27 @@
                                     <li class="dropdown-item">No Mail</li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown dropleft last-item">
 
-                                <a href="" class="nav-link font-size-icon" data-toggle="dropdown">
-                                    Nguyen Van A
+
+                            <li class="nav-item dropdown last-item">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span id="username">{{ Auth::user()->name }}</span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item">
-                                        <a href="" class="nav-link"><i class="far fa-user mr-2"></i>Profile</a>
-                                    </li>
-                                    <li class="dropdown-item">
-                                        <a href="" class="nav-link"><i class="fas fa-cogs mr-2"></i>Setting</a>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <li class="dropdown-item">
-                                        <a href="" class="nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
-                                    </li>
-                                </ul>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('index')}}" class="dropdown-item">Trang sản phẩm</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
+                           
                             
 
                         </ul>
