@@ -15,24 +15,15 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
                             <img src="{{ asset('img/800-300-800x300-5.png')}}" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3>Title</h3>
-                                <p>Description</p>
-                            </div>
+                           
                         </div>
                         <div class="carousel-item">
                             <img  src="{{ asset('img/Normal-Note20-800-300-800x300.png')}}" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3>Title</h3>
-                                <p>Description</p>
-                            </div>
+                            
                         </div>
                         <div class="carousel-item">
                             <img  src="{{ asset('img/reno4-chung-800-300-800x300-1.png')}}" alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3>Title</h3>
-                                <p>Description</p>
-                            </div>
+                            
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
