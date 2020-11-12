@@ -24,11 +24,12 @@
                             <th>Status</th>
                             <th>Date</th>
                             <th>Detail</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($invoices as $invoice)
-                            <tr>
+                            <tr class="align-items-center">
                                 <td>{{ $invoice->id }}</td>
                                 <td>{{ $invoice->customer->customer_name }}</td>
                                 <td>{{ $invoice->customer->customer_address }}</td>
@@ -43,10 +44,11 @@
                                 <td>{{ $invoice->status}}</td>
                                 <td>{{ $invoice->detailInvoice->created_at}}</td>
                                 <td>
-                                    <button class="btn" data-toggle="collapse" data-target="#invoice{{$invoice->id}}">
+                                    <button class="btn btn-sm" data-toggle="collapse" data-target="#invoice{{$invoice->id}}">
                                         <i class="fas fa-info-circle"></i>
                                     </button>
                                 </td>
+                               
                             </tr>
                             <tr>
                                 <td colspan="8">
@@ -57,8 +59,8 @@
                                                 @if($product->invoice_id == $invoice->id)
                                                     <div class="d-flex justify-content-around text-left">
                                                         <p>Name: {{$product->name}}</p>
-                                                        <p>Price: {{ number_format($invoice->detailInvoice->price)}}₫</p>
-                                                        <p>Quantity: {{$invoice->detailInvoice->quantity}}</p>
+                                                        <p>Price: {{ number_format($product->price)}}₫</p>
+                                                        <p>Quantity: {{$product->quantity}}</p>
                                                         
                                                     </div>
                                                 @endif

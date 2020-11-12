@@ -97,8 +97,10 @@
                     </ul>
                 </div>
             </div>
+            
+            
         </nav>
-        
+      
         <main class="py-2">
             @yield('content')
         </main>
@@ -145,6 +147,7 @@
     <script>
         $(document).ready(function(){
              $('[data-toggle="tooltip"]').tooltip();
+             $('.toast').toast('show');
         });
 
         var currentPage = document.getElementsByClassName('nav-link');

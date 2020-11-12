@@ -12,17 +12,14 @@ class InvoiceController extends Controller
 {
     //
     public function storeInvoice(Request $request){
-        $data = $request->validate([
-            'customer_name' => 'required',
-            'customer_phone' => ['regex:/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/'],
-            'customer_address' =>'required'
-        ]);
-        $customer = Customer::create($data);
+        
+        $customer = Customer::create($this->validateRequest());
         $invoiceData = [
             'customer_id' => $customer->id,
-            'status' => "Đã Nhận"
+            'status' => "Đã tiếp nhận đơn hàng"
         ];
         $invoice = Invoice::create($invoiceData);
+
         foreach(session('cart') as $id => $product){
             $invoiceDetail = [
                 'product_id' => $id,
@@ -35,8 +32,26 @@ class InvoiceController extends Controller
             $productUpdateQquantity->update(['quantity' => ($productUpdateQquantity->quantity - $product['quantity'])]);
         }
         session()->forget('cart');
-        return back();
+        return back()->with('idInvoice',$invoice->id);
 
+    }
+    public function validateRequest(){
+        
+
+        if(request()->input('address') == '2'){
+            $data = request()->validate([
+                'customer_name' => 'required',
+                'customer_phone' => ['regex:/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/'],
+                'customer_address' => 'required'
+            ]);
+        }else{
+            $data = request()->validate([
+                'customer_name' => 'required',
+                'customer_phone' => ['regex:/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/'],
+            ]);
+            $data['customer_address'] = "Tại cửa hàng.";
+        }
+        return $data;
     }
     
     public function index(){
@@ -46,7 +61,7 @@ class InvoiceController extends Controller
                                 ->select('invoice_id',DB::raw('sum(price*quantity) as total'))
                                 ->groupBy('invoice_id')->get();
         $products = Product::join('invoice_details','products.id','=','invoice_details.product_id')
-                                ->select('invoice_details.invoice_id','products.name')->get();
+                                ->select('invoice_details.invoice_id','invoice_details.quantity','products.name','products.price')->get();
         // dd($products);
         return view('admin.invoice',compact('invoices','total','totalEachInvoice','products'));
     }

@@ -48,17 +48,22 @@ class ProductController extends Controller
         
         $product->update($this->validateProduct());
         if($files =request()->file('image')){
+            $links=[];
             foreach($files as $file){
                 $name = $file->getClientOriginalName();
                 $file->move('uploads',$name);
-                $image = ProductImage::where('product_id',$product->id)->first();
-                $image->update(['image' => $name]);
-                
+                array_unshift($links,$name);
+            }
+            $images = ProductImage::where('product_id',$product->id)->limit(count($links))->get();
+            $i=0;
+            foreach($images as $image){
+                $image->update(['image' => $links[$i]]);
+                $i++;
             }
         }
-        return back()->with('message','Đã Lưu!');;
-
+        return back()->with('message','Đã Lưu!');
     }
+    
 
     public function destroy(Product $product){
         $name = $product->name;
@@ -88,8 +93,17 @@ class ProductController extends Controller
     //--------Detail item
     public function show($item){
         $product = Product::findOrFail($item);
-        // dd($product->images);
-        return view('layouts.item',compact('product'));
+        $data = explode("|",$product['description']);
+        $descriptions = [
+            "Màn Hình" => $data[0],
+            "Hệ Điều Hành" => $data[1],
+            "CPU" => $data[2],
+            "RAM" => $data[3],
+            "Bộ Nhớ" => $data[4],
+            "Chất Liệu" => $data[5]
+        ];
+        
+        return view('layouts.item',compact('product','descriptions'));
     }
 
     //--------Shopping Cart
@@ -113,7 +127,7 @@ class ProductController extends Controller
                 ];
             
             session()->put('cart',$cart);
-            return redirect()->back()->with('msg',"Đã Thêm vào giỏ hàng");
+            return redirect()->route('cart.index');
         }
 
 
@@ -125,7 +139,7 @@ class ProductController extends Controller
         ];
 
         session()->put('cart',$cart);
-        return redirect()->back()->with('msg',"Đã Thêm vào giỏ hàng");
+        return redirect()->route('cart.index');
     }
 
     public function updateFormCart(Request $request){

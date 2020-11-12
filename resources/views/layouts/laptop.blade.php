@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col table-responsive">
-                <table class="table table-borderless text-center">
+                <table class="table table-borderless table-responsive-lg text-center">
                    
                         <tbody class="p-5 img-popular">
                             <tr>

@@ -69,26 +69,43 @@
                     @csrf
                     <div class="row">
                         <div class="col form-group">
-                            <input type="text" name="customer_name" placeholder="Enter your name.." class="form-control" autocomplete="off" required>
+                            <input type="text" name="customer_name" placeholder="Enter your name.." value="{{ old('customer_name') }}" class="form-control" autocomplete="off" required>
                             @error('customer_name')
                             <strong class="text-danger">*{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="col">
-                            <input type="text" name="customer_phone" placeholder="Enter your phone.." class="form-control" autocomplete="off" required>
+                            <input type="text" name="customer_phone" placeholder="Enter your phone.." value="{{ old('customer_phone') }}" class="form-control" autocomplete="off" required>
                             @error('customer_phone')
                             <strong class="text-danger">*{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
+                    <div class="row mb-2">
+                       <div class="col">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="address"  value="1">Nhận tại cửa hàng
+                                </label>
+                            </div>
+                       </div>
+                       <div class="col">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="address" value="2" checked>Giao tận nơi
+                                </label>
+                            </div>
+                       </div>
+                    </div>
                     <div class="row">
                         <div class="col form-group">
-                            <input type="text" name="customer_address" placeholder="Enter your address.." class="form-control" autocomplete="off" required>
+                            <input type="text" name="customer_address" value="{{ old('customer_address') }}" id="address" placeholder="Enter your address.." class="form-control" autocomplete="off">
                             @error('customer_address')
                             <strong class="text-danger">*{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
+                    
                     <div class="row mt-1">
                         <div class="col text-center">
                             <button type="submit" class="btn btn-success">Checkout</button>
@@ -99,6 +116,12 @@
             </div>
         </div>
 
+    @elseif(session('idInvoice'))
+        <div class="d-flex flex-colum justify-content-center align-items-center search">
+            <div class="text-center">
+               <h5 class="font-weight-bold">Cảm ơn bạn đã mua hàng từ chúng tôi, mã đơn hàng của bạn là <span  class="text-success">{{ session('idInvoice')}}</span> </h5>
+            </div>
+        </div>
     @else
         <div class="d-flex flex-colum justify-content-center align-items-center search">
             <div class="text-center">
@@ -112,6 +135,15 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
+        $('input[type="radio"]').click(function () {
+            if ($(this).attr("value") == "1") {
+                $("#address").hide();
+            }
+            if ($(this).attr("value") == "2") {
+                $("#address").show();
+
+            }
+        });
 
         $(".remove").click(function(e){
             e.preventDefault();

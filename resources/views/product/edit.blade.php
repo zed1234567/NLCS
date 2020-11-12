@@ -76,9 +76,9 @@
                   @enderror
                 </div>
                 <div class="col-6 form-group">
-                    <label for="detail">Mô tả sản phẩm</label>
+                    <label for="detail">Mô tả sản phẩm (Màn hình|Hệ điều hành|CPU|RAM|Bộ nhớ|Chất liệu)</label>
                     <textarea name="description" cols="50"
-                    rows="4" placeholder="Nhập mô tả sản phẩm" class="form-control"></textarea>
+                    rows="4" placeholder="Nhập mô tả sản phẩm" class="form-control">{{ old('description') ?? $product->description}}</textarea>
                   </div>
               </div>
 

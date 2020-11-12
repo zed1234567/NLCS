@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->unsignedBigInteger('brand_id');
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('description')->nullable();
             $table->timestamps();
         });

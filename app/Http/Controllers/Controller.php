@@ -18,7 +18,7 @@ class Controller extends BaseController
         $laptops = $this->getProductsByGroup($this->getIdGroup("LAPTOP"));
         $tablets = $this->getProductsByGroup($this->getIdGroup("TABLE"));
         $types = compact('phones','laptops','tablets');
-        // dd($types);
+
         return view('index')->with('types',$types);
     }
 

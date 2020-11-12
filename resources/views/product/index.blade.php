@@ -42,7 +42,7 @@
                                 <td>{{ $product->group->group }}</td>
                                 <td>{{ $product->brand->brand }}</td>
                                 <td><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt="" height=100 weight=100></td>
-                                <td></td>
+                                <td>{{ \Illuminate\Support\Str::limit($product->description,10,'...') }}</td>
                                 <td class="d-flex">
                                     <form action="{{ route('product.edit',$product->id) }}" class="mr-3">
                                         @csrf
