@@ -5,7 +5,7 @@
 
         <!-- Carouse -->
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8 col-sm-12">
                 <div id="carouselId" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselId" data-slide-to="0" class="active"></li>
@@ -36,7 +36,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <div class="row">
                     <img src="{{ asset('img/iPhoneDOCQUYEN-398-110-398x110.png')}}" class="w-100 " alt="">
                 </div>
@@ -56,13 +56,12 @@
                 <h5 class="font-weight-bold">{{ $products[0]->group->group }} NỔI BẬT NHẤT</h5>
                 <a href="{{ route(strtolower($products[0]->group->group)) }}">Xem tất cả</a>
             </div>
-            <div class="row justify-content-between mb-4">
+            <div class="row  mb-4">
                 @foreach($products as $product)
                 <div class="col-lg-3 col-md-6 mt-3">
                     <div class="product">
                         <div class="product-img">
                             <a href="{{ route('product.show',$product->id)}}" class="text-center"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
-                            <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->
                             <div class="product-overlay">
                                 <a href="{{ route('cart.add',$product->id) }}" class="add-to-cart"><i class="fas fa-cart-plus"></i><span> Add to Cart</span></a>
                                 <a href="{{ route('product.show',$product->id) }}" class="item-quick-view"><i class="fas fa-search-plus"></i><span> Quick View</span></a>
@@ -90,8 +89,24 @@
         @endforeach
     </div> 
    
+   
     <div class="container">
-        <div class="row">
+        <!-- <div class="row mb-2">
+            <div class="col-lg-3 col-sm-6">
+                <img src="{{asset('/img/qc-3.webp')}}" alt="" class="w-100 img-footer  img-fluid">
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <img src="{{asset('/img/qc-3.webp')}}" alt="" class="w-100 img-footer img-fluid" >
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <img src="{{asset('/img/qc-3.webp')}}" alt="" class="w-100 img-footer img-fluid">
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <img src="{{asset('/img/qc-3.webp')}}" alt="" class="w-100 img-footer img-fluid">
+            </div>
+        </div> -->
+        <!-- <div class="fancy-title title-border"></div> -->
+        <div class="row mt-2">
             <div class="col-lg-3 col-sm-12 text-center ">
                 <h5><i class="far fa-thumbs-up mr-3"></i>100% ORIGINAL</h5>
                 <p>We guarantee you the sale of Original Brands.</p>

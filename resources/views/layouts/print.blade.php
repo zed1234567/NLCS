@@ -2,7 +2,7 @@
 
     @foreach($products as $product)
             <div class="col-lg-3 col-md-6">
-                <div class="product w-55">
+                <div class="product w-55 mt-2">
                     <div class="product-img">
                         <a href="{{ route('product.show',$product->id)}}"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
                         <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->

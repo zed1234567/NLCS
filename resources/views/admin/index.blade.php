@@ -22,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
-<body>
+<body class="overflow-hidden">
     
    <div class="wrapper">
        <ul class="navbar-nav sidebar backgroud">

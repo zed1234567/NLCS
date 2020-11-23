@@ -33,7 +33,7 @@
                     <ul class="navbar-nav mr-auto">
                         <form method="GET" action="{{ route('search') }}" class="form-inline my-2 my-lg-0 form-search">
                             @csrf
-                            <input class="form-control mr-sm-2" id="input-search" name="key" type="text" placeholder="Search" autocomplete="off">
+                            <input class="form-control mr-sm-2" id="input-search" name="key" type="text" placeholder="Search" autocomplete="off" >
                             <button class="btn" type="submit"><i class="fas fa-search "></i></button>
                         </form>
                     </ul>

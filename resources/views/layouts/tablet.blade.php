@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8 col-sm-12">
             <div id="carouselId" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselId" data-slide-to="0" class="active"></li>
@@ -31,7 +31,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-sm-12">
             <div class="row">
                 <div class="col mb-2">
                     <img src="{{ asset('/img/tablet-4.png') }}" class="w-100" alt="">
@@ -49,7 +49,7 @@
         <div class="row pt-3">
            <div class="col">
                 <div class="fancy-title title-border">
-                    <h4>Popular Brands</h4>
+                    <h4>POPULAR BRANDS</h4>
                 </div>
            </div>
         </div>
@@ -78,6 +78,7 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <input type="hidden" value="{{$id}}" id="type">
+                        <button type="reset" class="mr-2 btn btn-outline-danger" onclick="window.location.reload()">Xóa</button>
                         <select class="custom-select mr-2" name="brand" id="brandFilter">
                             <option disabled selected>Thương Hiệu</option>
                             @foreach($brands as $brand)
@@ -104,7 +105,7 @@
     <div class="row" id="filter">
         @foreach($products as $product)
         <div class="col-lg-3 col-md-6 mt-3">
-            <div class="product w-55">
+            <div class="product w-55 mt-1">
                 <div class="product-img">
                     <a href="{{ route('product.show',$product->id)}}"><img src="{{ asset('/uploads/'.$product->images[0]->image) }}" alt=""></a>
                     <!-- <a href="" class="change-img"><img src="{{ asset('img/2-2.jpg') }}" class="img-on" alt=""><img src="{{ asset('img/1-1.jpg') }}"  class="img-off" alt=""></a> -->

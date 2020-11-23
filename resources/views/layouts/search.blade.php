@@ -6,7 +6,7 @@
         <div class="search">
             @if(count($products) !=0)
             <h5 class="font-weight-bold mt-4">Tìm thấy {{ count($products)}} sản phẩm phù hợp</h5>
-            <div class="row justify-content-between mb-4">
+            <div class="row  mb-4">
                 @foreach($products as $product)
                 <div class="col-lg-3 col-md-6 mt-3">
                     <div class="product">

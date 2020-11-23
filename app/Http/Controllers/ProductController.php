@@ -93,6 +93,7 @@ class ProductController extends Controller
     //--------Detail item
     public function show($item){
         $product = Product::findOrFail($item);
+        $products = Product::where('brand_id',$product->brand_id)->where('name','<>',$product->name)->limit(4)->get();
         $data = explode("|",$product['description']);
         $descriptions = [
             "Màn Hình" => $data[0],
@@ -103,7 +104,7 @@ class ProductController extends Controller
             "Chất Liệu" => $data[5]
         ];
         
-        return view('layouts.item',compact('product','descriptions'));
+        return view('layouts.item',compact('product','descriptions','products'));
     }
 
     //--------Shopping Cart
@@ -123,7 +124,7 @@ class ProductController extends Controller
                     'price' => $product->price,
                     'quantity' => 1,
                     'img' => $product->images[0]->image
-                ]
+                    ]
                 ];
             
             session()->put('cart',$cart);
