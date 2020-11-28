@@ -102,6 +102,7 @@
         </nav>
       
         <main class="py-2">
+            <div id="scrollOnTop" onclick="onTop()" ><i class="fas fa-chevron-up"></i></div>
             @yield('content')
         </main>
 

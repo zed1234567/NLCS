@@ -36,7 +36,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-4 carousel-responsive">
                 <div class="row">
                     <img src="{{ asset('img/iPhoneDOCQUYEN-398-110-398x110.png')}}" class="w-100 " alt="">
                 </div>

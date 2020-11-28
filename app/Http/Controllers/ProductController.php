@@ -22,8 +22,14 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $product = Product::create($this->validateProduct());
+       
+        $this->validate($request,[
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
 
+        $product = Product::create($this->validateProduct());
+        
         if($files =request()->file('image')){
             foreach($files as $file){
                 $name = $file->getClientOriginalName();
@@ -73,12 +79,12 @@ class ProductController extends Controller
 
     private function validateProduct(){
         return request()->validate([
-            'name' => 'required|min:10',
-            'price' => 'required',
-            'quantity' => 'required',
+            'name' => 'required|alpha_num|min:10',
+            'price' => 'required|numeric|gt:0',
+            'quantity' => 'required|numeric|gte:0',
             'group_id' => 'required',
             'brand_id' => 'required',
-            'description' => 'nullable',
+            'description' => ["regex:/(([a-zA-Z0-9. ',])+([|])){5}+([a-zA-Z0-9. ',]{1,})$/"],
         ]);
     }
 

@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table text-center">
+                <table class="table text-center cart-responsive">
                     <thead class="thead-inverse">
                         <tr>
                             <th></th>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col">
+            <div class="col-md-6 col-sm-12">
                 <h4 class="text-center mb-3">Cart Total</h4>
                 <table class="table">
                     <tbody>
@@ -63,7 +63,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col">
+            <div class="col-md-6 col-sm-12">
                 <h4 class="text-center mb-3">Customer Information</h4>
                 <form action="{{ route('invoice.store') }}" method="post">
                     @csrf

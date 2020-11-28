@@ -31,7 +31,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-4 carousel-responsive">
             <div class="row">
                 <div class="col mb-1 mt-1">
                     <img src="{{ asset('/img/phone-img4.png') }}" class="w-100" alt="">
@@ -72,7 +72,7 @@
     
     <div class="row mt-3">
         <div class="col">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between responsive-filler">
                 <h4 class="font-weight-bold">{{$name}}</h4>
 
                 <div class="form-group">
@@ -143,7 +143,7 @@
     </div>
    
     
-
+  
 </div> 
 <script type="text/javascript">
     $(document).ready(function(){

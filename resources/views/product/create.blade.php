@@ -56,24 +56,26 @@
                   <label for="quantity">Số Lượng</label>
                   <input type="text"  class="form-control" name="quantity" placeholder="Nhập số lượng ... " required value="{{ old('quantity') }}" autocomplete="off">
                   @error('quantity')
-                      
-                          <strong class="text-danger">*{{ $message }}</strong>
-                     
+                    <strong class="text-danger">*{{ $message }}</strong>
                   @enderror
                 </div>
                 <div class="col-6 form-group">
                     <label for="detail">Mô tả sản phẩm (Màn hình|Hệ điều hành|CPU|RAM|Bộ nhớ|Chất liệu)</label>
                     <textarea name="description" cols="50"
-                    rows="4" placeholder="Nhập mô tả sản phẩm" class="form-control"></textarea>
+                    rows="4" placeholder="Nhập mô tả sản phẩm" required class="form-control"></textarea>
+                    @error('description')
+                      <strong class="text-danger">*{{ $message }}</strong>
+                    @enderror
                   </div>
               </div>
 
               <div class="row">
                 <div class="col form-group">
                   <label for="image">Hình ảnh</label>
-                  <input type="file" name="image[]"  class="form-control-file " required multiple>
+                  <input type="file" name="image[]"  class="form-control-file " required="" multiple>
+
                   @error('image')
-                  <strong class="text-danger">*{{ $message }}</strong>
+                    <strong class="text-danger">*{{ $message }}</strong>
                   @enderror
                 </div>
               </div>

@@ -447,3 +447,57 @@ footer{
 }
 
 /* -------------------- */
+/* --Cart Responsive--- */
+@media screen and  (max-width: 760px){
+	.cart-responsive,
+	.cart-responsive thead,
+	.cart-responsive tbody,
+	.cart-responsive th,
+	.cart-responsive td,
+	.cart-responsive tr {
+		display: block;
+	}
+
+	.cart-responsive thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	.cart-responsive tr {
+		border: none;
+	}
+
+	.cart-responsive tr td {
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+		border-top: 1px solid #dee2e6;
+	}
+	
+	.cart-responsive td:before {
+		position: absolute;
+		top: 7px;
+		left: 7px;
+		width: 45%;
+		padding-right: 10px;
+	}
+
+	.cart-responsive td:first-child{
+		text-align: center;
+		padding-left: 0%;
+	}
+
+	.cart-responsive td:nth-child(2):before {content: "Name";}
+	.cart-responsive td:nth-child(3):before {content: "Unit Price";}
+	.cart-responsive td:nth-child(4):before {content: "Quantity";}
+	.cart-responsive td:nth-child(5):before {content: "Total";}
+
+	.carousel-responsive{
+		display: none;
+	}
+
+	.responsive-filler{
+		flex-direction: column;
+	}
+}
