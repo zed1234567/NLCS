@@ -79,7 +79,7 @@ class ProductController extends Controller
 
     private function validateProduct(){
         return request()->validate([
-            'name' => 'required|alpha_num|min:10',
+            'name' => 'required|min:10',
             'price' => 'required|numeric|gt:0',
             'quantity' => 'required|numeric|gte:0',
             'group_id' => 'required',
@@ -151,8 +151,14 @@ class ProductController extends Controller
 
     public function updateFormCart(Request $request){
         if($request->id && $request->quantity){
+            $quantityFromData = Product::select('quantity')->where('id',$request->id)->first()->quantity;
+
             $cart = session()->get('cart');
-            $cart[$request->id]['quantity'] = $request->quantity;
+            if($request->quantity > $quantityFromData){
+                $cart[$request->id]['quantity'] = $quantityFromData;
+            }else{
+                $cart[$request->id]['quantity'] = $request->quantity;
+            }
             session()->put("cart",$cart);
         }
     }

@@ -37,16 +37,19 @@ class InvoiceController extends Controller
     }
     public function validateRequest(){
         
+        $regex = "aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
+        fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTu
+        UùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ";
 
         if(request()->input('address') == '2'){
             $data = request()->validate([
-                'customer_name' => 'required|alpha|min:10',
+                'customer_name' => "required|regex:/^[".$regex."]+(([',. -][".$regex." ])?[".$regex."]*)*$/",
                 'customer_phone' => ['regex:/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/'],
                 'customer_address' => 'required|min:10'
             ]);
         }else{
             $data = request()->validate([
-                'customer_name' => 'required|alpha|min:10',
+                'customer_name' => "required|regex:/^[".$regex."]+(([',. -][".$regex." ])?[".$regex."]*)*$/",
                 'customer_phone' => ['regex:/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/'],
             ]);
             $data['customer_address'] = "Tại cửa hàng.";

@@ -27,7 +27,7 @@
                         @foreach(session('cart') as $id => $product)
                            <?php $total+= ($product['price']*$product['quantity']) ?>
                         <tr>
-                            <td><img src="{{ asset('/uploads/'.$product['img']) }}" height="100" width="100" alt=""></td>
+                            <td> <a href="{{ route('product.show',$id)}}"><img src="{{ asset('/uploads/'.$product['img']) }}" height="100" width="100" alt=""></a></td>
                             <td>{{$product['name']}}</td>
                             <td>{{ number_format($product['price'])}}₫</td>
                             <td class="d-flex justify-content-center ">    

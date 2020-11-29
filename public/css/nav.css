@@ -109,6 +109,14 @@ h4{
 	width: 100%;
 	height: 100%;
 }
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon{
+	padding: 10px;
+	border-radius: 50%;
+	background-color:rgba(0,0,0,.3);
+	font-family: 'Lato', sans-serif;
+}
 /* ---------Fancy-title and border------- */
 
 .fancy-title{
