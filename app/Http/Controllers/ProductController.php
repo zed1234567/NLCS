@@ -7,6 +7,7 @@ use App\Brand;
 use App\Product;
 use App\Group;
 use App\ProductImage;
+use App\Customer;
 class ProductController extends Controller
 {
     //----------Admin------------------------------------ 
@@ -69,12 +70,21 @@ class ProductController extends Controller
         }
         return back()->with('message','Đã Lưu!');
     }
-    
+    //Soft delete
+    public function trash(){
+        $products = Product::onlyTrashed()->paginate(4);
+        return view('product.trash',compact('products'));
+    }
 
     public function destroy(Product $product){
         $name = $product->name;
         $product->delete();
         return back()->with('message',"Đã Xóa ". $name);
+    }
+
+    public function restore($id){
+        Product::withTrashed()->where('id',$id)->restore();
+        return redirect()->route('product.index')->with('message','Đã Phục Hồi!');
     }
 
     private function validateProduct(){

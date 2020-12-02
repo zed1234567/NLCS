@@ -15,15 +15,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 //index
 Route::get('/','Controller@index')->name('index');
-
 Route::get('/phone','Controller@Phone')->name('smartphone');
 Route::get('/laptop','Controller@laptop')->name('laptop');
 Route::get('/tablet','Controller@tablet')->name('table');
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Search
-
 Route::get('/search','Controller@search')->name('search');
 
 // Product Admin
@@ -31,17 +28,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin',function(){
         return view('admin.index');
     })->name('admin.index');
+    
     Route::get('/product','ProductController@index')->name('product.index');
     Route::get('/product/create',"ProductController@create")->name('product.create');
     Route::post('/product',"ProductController@store")->name('product.store');
     Route::get('/product/{product}/edit','ProductController@edit')->name('product.edit');
     Route::patch('/product/{product}','ProductController@update')->name('product.update');
     Route::delete('/product/{product}','ProductController@destroy')->name('product.destroy');
-    Route::get('/invoice','InvoiceController@index')->name('invoice.index');
     Route::get('/product/group-brand','ProductController@createGB')->name('product.GB');
+    Route::get('/trash','ProductController@trash')->name('product.trash');
+    Route::get('/trash/{id}','ProductController@restore')->name('product.restore');
+
+    Route::get('/invoice','InvoiceController@index')->name('invoice.index');
+    Route::patch('/invoice/{invoice}','InvoiceController@update')->name('invoice.update');
+   
     Route::post('/brand','BrandController@store')->name('brand.store');
     Route::post('/group','GroupController@store')->name('group.store');
     Route::delete('/brand/{brand}','BrandController@destroy')->name('brand.destroy');
+   
 });
 
 //Detail Product
@@ -58,3 +62,6 @@ Route::post('/addinvoice','InvoiceController@storeInvoice')->name('invoice.store
 
 //Filter Product
 Route::get('/filter','ProductController@filterProduct')->name('filter');
+
+//Check Info Customer by phone number
+Route::post('/check','CustomerController@checkInfoCustomer')->name('customer.info');

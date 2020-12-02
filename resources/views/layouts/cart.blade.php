@@ -67,32 +67,37 @@
                 <h4 class="text-center mb-3">Customer Information</h4>
                 <form action="{{ route('invoice.store') }}" method="post">
                     @csrf
+                    <input type="hidden" name="isCustomerExit" id="isCustomerExit" value="0">
                     <div class="row">
-                        <div class="col form-group">
-                            <input type="text" name="customer_name" placeholder="Enter your name.." value="{{ old('customer_name') }}" class="form-control" autocomplete="off" required>
-                            @error('customer_name')
-                            <strong class="text-danger">*{{ $message }}</strong>
-                            @enderror
-                        </div>
+
                         <div class="col">
-                            <input type="text" name="customer_phone" placeholder="Enter your phone.." value="{{ old('customer_phone') }}" class="form-control" autocomplete="off" required>
+                            
+                            <input type="text" name="customer_phone" id="customer_phone" placeholder="Enter your phone.." value="{{ old('customer_phone') }}" class="form-control" autocomplete="off" required>
                             @error('customer_phone')
                             <strong class="text-danger">*{{ $message }}</strong>
                             @enderror
                         </div>
+                        <div class="col form-group">
+                         
+                            <input type="text" name="customer_name" id="customer_name" placeholder="Enter your name.." value="{{ old('customer_name') }}" class="form-control" autocomplete="off" required>
+                            @error('customer_name')
+                            <strong class="text-danger">*{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        
                     </div>
                     <div class="row mb-2">
                        <div class="col">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="address"  value="1">Nhận tại cửa hàng
+                                    <input type="radio" class="form-check-input" name="address" id="atShop"  value="1">Nhận tại cửa hàng
                                 </label>
                             </div>
                        </div>
                        <div class="col">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="address" value="2" checked>Giao tận nơi
+                                    <input type="radio" class="form-check-input" name="address" value="2" id="atHome" checked>Giao tận nơi
                                 </label>
                             </div>
                        </div>
@@ -173,6 +178,45 @@
             });
             
         });
+
+        var typingTimer;
+        var doneTyping = 1500;
+        $("input[name='customer_phone']").keyup(function(){
+            clearTimeout(typingTimer);
+            if($("input[name='customer_phone']").val()){
+                typingTimer = setTimeout(checkInfoCustomer,doneTyping);
+            }
+        });
+
+        function checkInfoCustomer(){
+           $.ajax({
+               url: "{{ route('customer.info') }}",
+               method: "POST",
+               data: {_token: '{{ csrf_token() }}', phone: $("input[name='customer_phone']").val()},
+               success: function(data){
+                    updateInfoCustomer(data);
+               },
+               error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+               
+           });
+        }
+
+        function updateInfoCustomer(data){
+            if(data != 0){
+                $('#customer_name').val(data[0].customer_name);
+                if(data[0].customer_address == "Tại cửa hàng."){
+                    $('#atHome').attr("checked",false);
+                    $('#atShop').click();
+                }else{
+                    $('#atHome').attr("checked",true);
+                    $('#atHome').click();
+                    $('#address').val(data[0].customer_address);
+                }
+               $('#isCustomerExit').val(1);
+            }
+        }
     });
 </script>
 @endsection

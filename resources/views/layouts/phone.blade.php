@@ -77,26 +77,30 @@
 
                 <div class="form-group">
                     <div class="d-flex">
-                        <input type="hidden" value="{{$id}}" id="type">
-                        <button type="reset" class="mr-2 btn btn-outline-danger" onclick="window.location.reload()">Xóa</button>
-                        <select class="custom-select mr-2" name="brand" id="brandFilter">
-                            <option disabled selected>Thương Hiệu</option>
-                            @foreach($brands as $brand)
-                                <option value="{{$brand->id}}">{{ $brand->brand }}</option>
-                            @endforeach
-                        </select>
-                        <select class="custom-select mr-2" name="price" id="priceFilter">
-                            <option disabled selected>Mức Giá</option>
-                            <option value="1">Dưới 5 triệu</option>
-                            <option value="2">Từ 5 - 15 triệu</option>
-                            <option value="3">Từ 15 - 25 triệu</option>
-                            <option value="4">Trên 25 triệu</option>
-                        </select>
-                        <select class="custom-select" name="sort" id="sortFilter">
-                            <option disabled selected>Sắp xếp</option>
-                            <option value="ASC">Tăng dần</option>
-                            <option value="DESC">Giảm dần</option>
-                        </select>
+                        <div>
+                            <input type="hidden" value="{{$id}}" id="type">
+                            <button type="reset" class="mr-2 btn btn-outline-danger" onclick="window.location.reload()">Xóa bộ lọc</button>
+                        </div>
+                        <div class="d-flex">
+                            <select class="custom-select mr-2" name="brand" id="brandFilter">
+                                <option disabled selected>Thương Hiệu</option>
+                                @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}">{{ $brand->brand }}</option>
+                                @endforeach
+                            </select>
+                            <select class="custom-select mr-2" name="price" id="priceFilter">
+                                <option disabled selected>Mức Giá</option>
+                                <option value="1">Dưới 5 triệu</option>
+                                <option value="2">Từ 5 - 15 triệu</option>
+                                <option value="3">Từ 15 - 25 triệu</option>
+                                <option value="4">Trên 25 triệu</option>
+                            </select>
+                            <select class="custom-select" name="sort" id="sortFilter">
+                                <option disabled selected>Sắp xếp</option>
+                                <option value="ASC">Tăng dần</option>
+                                <option value="DESC">Giảm dần</option>
+                            </select>
+                        </div>
                    </div>
                </div>
             </div>
