@@ -13,9 +13,7 @@ class InvoiceController extends Controller
     //
     public function storeInvoice(Request $request){
 
-       
-        
-        if($request->isCustomerExit != 1){
+       if($request->isCustomerExit != 1){
             $customer = Customer::create($this->validateRequest());
            
         }else{
@@ -80,7 +78,6 @@ class InvoiceController extends Controller
         $totalByMonth = DB::table('invoice_details')
                             ->select(DB::raw('sum(price*quantity) as total'),DB::raw('MONTH(created_at) as month'),DB::raw('YEAR(created_at) as year'))
                             ->groupBy('month','year')->get();
-        // dd($totalByMonth);
         
         $totalEachInvoice = DB::table('invoice_details')
                                 ->select('invoice_id',DB::raw('sum(price*quantity) as total'))
@@ -89,7 +86,7 @@ class InvoiceController extends Controller
         $products = Product::join('invoice_details','products.id','=','invoice_details.product_id')
                                 ->select('invoice_details.invoice_id','invoice_details.quantity','products.name','invoice_details.price')
                                 ->withTrashed()->get();
-        // dd($products);
+                                
         return view('admin.invoice',compact('invoices','total','totalByMonth','totalEachInvoice','products'));
     }
 

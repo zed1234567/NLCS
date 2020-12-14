@@ -10,7 +10,7 @@ use App\ProductImage;
 use App\Customer;
 class ProductController extends Controller
 {
-    //----------Admin------------------------------------ 
+    //-------------------------Admin----------------------------------
     public function index(){
         $products = Product::paginate(4);
         return view('product.index',compact('products'));
@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
         return back()->with('message','Đã Lưu!');
     }
-    //Soft delete
+    //-----------------------------Soft delete----------------------------------
     public function trash(){
         $products = Product::onlyTrashed()->paginate(4);
         return view('product.trash',compact('products'));
@@ -86,7 +86,7 @@ class ProductController extends Controller
         Product::withTrashed()->where('id',$id)->restore();
         return redirect()->route('product.index')->with('message','Đã Phục Hồi!');
     }
-
+    //---------------------------End Soft Delete ---------------------------------
     private function validateProduct(){
         return request()->validate([
             'name' => 'required|min:10',
@@ -104,7 +104,7 @@ class ProductController extends Controller
         $groups = Group::all();
         return view('product.group-brand',compact('brands','groups'));
     }
-    // ------------------------------------------------------
+    // ------------------------End Admin------------------------------
 
     //--------Detail item
     public function show($item){
@@ -165,7 +165,7 @@ class ProductController extends Controller
 
             $cart = session()->get('cart');
             if($request->quantity > $quantityFromData){
-                $cart[$request->id]['quantity'] = $quantityFromData;
+                $cart[$request->id]['quantity'] = $quantityFromData; //Set quantity == max quantity in database
             }else{
                 $cart[$request->id]['quantity'] = $request->quantity;
             }

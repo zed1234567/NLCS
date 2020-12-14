@@ -84,11 +84,7 @@
 
                             <a href="{{route('index')}}" class="btn btn-primary ml-3">Trang chủ</a>
 
-                            <!-- @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif -->
+                         
 
                         </div>
                     </div>

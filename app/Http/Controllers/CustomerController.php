@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 class CustomerController extends Controller
 {
-    //
+    //Autofill customer info when customer enter phone number
     public function checkInfoCustomer(Request $request){
         $isCustomer = Customer::where('customer_phone','=',$request->phone)->count();
 

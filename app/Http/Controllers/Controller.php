@@ -13,6 +13,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    //
+
     public function index(){
         $phones = $this->getProductsByGroup($this->getIdGroup("SMARTPHONE"));
         $laptops = $this->getProductsByGroup($this->getIdGroup("LAPTOP"));
